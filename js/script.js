@@ -1,10 +1,9 @@
-'use strict';
+
 document.getElementById('test-button').addEventListener('click', function(){
     const links = document.querySelectorAll('.titles a');
     console.log('links:', links);
   });
 
-  'use strict';
   event.preventDefault();
   const titleClickHandler = function(){
     console.log('Link was clicked!');
@@ -27,6 +26,9 @@ for(let activeArticle of activeArticles){
 }
 
   /* get 'href' attribute from the clicked link */
+  const clickElement = articleSelector()
+  let = articleSelector.getAttribute('href');
+  console.log('href:', href);
 
   /* find the correct article using the selector (value of 'href' attribute) */
 
