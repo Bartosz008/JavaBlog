@@ -25,14 +25,17 @@ for(let activeArticle of activeArticles){
     activeArticle.classList.remove('active');
 }
 
-  /* get 'href' attribute from the clicked link */
-  const clickElement = articleSelector()
-  let = articleSelector.getAttribute('href');
-  console.log('href:', href);
+  /* ??get 'href' attribute from the clicked link ??*/
+  var div = document.getAtribute('href')
+  const clickElement = this;
+  const href = clickedElement.getAttribute('href');
 
-  /* find the correct article using the selector (value of 'href' attribute) */
+  /*?? find the correct article using the selector (value of 'href' attribute)?? */
+  const targetArticle = document.querySelector('href');
 
   /* add class 'active' to the correct article */
+  console.log('targetArticle:', targetArticle);
+
   }
   const links = document.querySelectorAll('.titles a');
   
