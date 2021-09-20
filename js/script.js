@@ -33,3 +33,33 @@ document.getElementById('test-button').addEventListener('click', function(){
   const links = document.querySelectorAll('.titles a');
   console.log('links:', links);
 });
+
+const optArticleSelector = '.post',
+  optTitleSelector = '.post-title',
+  optTitleListSelector = '.titles';
+
+function generateTitleLinks(){
+
+  /* remove contents of titleList */
+  function clearMessages(){
+    document.getElementById('messages').innerHTML = '';
+  }
+  /* for each article */
+  const optArticleSelector = 'article';
+  optTitleSelector = '.post-title';
+  for(let article of articles){
+    link.optArticleSelector('article');
+  }
+    /* get the article id */
+  const Id = articleId.getAttribute('Id'),
+    /* find the title element */
+    const articleTitle = article.querySelector(optTitleSelector).innerHTML;
+    /* get the title from the title element */
+
+    /* create HTML of the link */
+
+    /* insert link into titleList */
+
+
+}
+generateTitleLinks();
