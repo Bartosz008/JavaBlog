@@ -70,7 +70,6 @@ function generateTags(){
     for(let article of articles){
 
   /* START LOOP: for every article: */
-  let article = [1,2,3,4,5]
   for (let article of articles){
     console.log(articles)
   }
@@ -155,6 +154,7 @@ function tagClickHandler(event){
   /* END LOOP: for each active tag link */
 
   /* find all tag links with "href" attribute equal to the "href" constant */
+  const tag = article.querySelector(href);
 
   /* START LOOP: for each found tag link */
 
@@ -163,6 +163,9 @@ function tagClickHandler(event){
   /* END LOOP: for each found tag link */
 
   /* execute function "generateTitleLinks" with article selector as argument */
+  generateTitleLinks('[data-tags~="' + tag + '"]');
+  const articles = document.querySelectorAll(optArticleSelector + customSelector);
+  console.log(generateTitleLinks)
 }
 
 function addClickListenersToTags(){
