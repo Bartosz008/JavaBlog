@@ -97,7 +97,7 @@ function generateTags(){
       console.log(linkHTML);
 
       /*?? add generated code to html variable?? */
-      clickedElement.codeList.add('html code');
+      generateCode.codeList.add('html code');
 
 
     /* END LOOP: for each tag */
