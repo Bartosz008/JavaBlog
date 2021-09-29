@@ -183,4 +183,18 @@ function addClickListenersToTags(){
 
 }
 
-addClickListenersToTags();
+addClickListenersToAutors();
+  }
+
+  function generateAuthors{
+    const authors = document.querySelectorAll(optArticleSelector);
+
+    const authorClickHandler = document.querySelectorAll('.titles a.active');
+    for(let tag of tags){
+      link.addEventListener('click', authorClickHandler);
+
+
+
+
+  }
+
