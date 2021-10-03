@@ -224,12 +224,14 @@ generateAuthors();
 addClickListenersToAuthor();
 
 function optTagsListSelector (tags,list);
-optCloudClassCount o wartości 5,
-optCloudClassPrefix o wartości tag-size-.
+optCloudClassCount (5);
+optCloudClassPrefix  (tag-size-.);
 calculateTagClass (count, params);
 
 params.max = Math.max(tags[tag], params.max);
 return params;
+
+const classNumber = Math.floor( percentage * (optCloudClassCount - 1) + 1 );
 
  generateTags()
 
@@ -293,3 +295,4 @@ console.log('tagLinkHTML:', tagLinkHTML);
 }
 /*[NEW] add HTML from allTagsHTML to tagList */
 tagList.innerHTML = allTagsHTML;
+
