@@ -149,8 +149,53 @@ function addClickListenersToTags(){
   /* END LOOP: for each link */
 }
 
-
+optAuthorsListSelector()
 function generateAuthors() {
+
+    /* [NEW] create a new variable allAuthors with an empty object */
+  let allAuthors = {};
+
+  /* find all authors */
+  const authors = document.querySelectorAll('.post')
+
+  /* START LOOP: for every author: */
+  for (let author of authors){
+
+    /* find authors wrapper */
+const authorWrapperList = article.querySelector('.post-tags .list');
+
+    /* make html variable with empty string */
+    let html = '';
+
+    /* get tags from authors attribute */
+    const articleAuthors = article.getAttribute('authors');
+
+    /* split tags into array */
+    const articleTagsArray = articleTags.split(' ');
+
+
+      /* add generated code to html variable */
+      html = html + linkHTML;
+
+      /* [NEW] check if this link is NOT already in allAuthors */
+      if(!allAuthors[author]) {
+        /* [NEW] add generated code to allAuthors array */
+        allAuthors[author] = 1;
+      }else{
+        allAuthors[author]++;
+      }
+    /* END LOOP: every article */
+    }
+ /* [NEW] create variable for all links HTML code */
+ const authorsParams = calculateAuthorsParams(allAuthors);
+let allAuthorsHTML = '';
+
+/* [NEW] START LOOP: for each tag in allAuthors: */
+for(let author in allAuthors){
+
+  allAuthorsHTML += authorLinkHTML;
+}
+authorList.innerHTML = allAuthorsHTML;
     
   /* find all articles */
   const articles = document.querySelectorAll('.post')
