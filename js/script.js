@@ -222,3 +222,74 @@ generateTags();
 addClickListenersToTags();
 generateAuthors();
 addClickListenersToAuthor();
+
+function optTagsListSelector (tags,list);
+optCloudClassCount o wartości 5,
+optCloudClassPrefix o wartości tag-size-.
+calculateTagClass (count, params);
+
+params.max = Math.max(tags[tag], params.max);
+return params;
+
+ generateTags()
+
+  /* [NEW] create a new variable allTags with an empty object */
+  let allTags = {};
+
+  /* find all articles */
+  const articles = document.querySelectorAll('.post')
+
+  /* START LOOP: for every article: */
+  for (let article of articles){
+
+    /* find tags wrapper */
+const tagsWrapperList = article.querySelector('.post-tags .list');
+
+    /* make html variable with empty string */
+    let html = '';
+
+    /* get tags from data-tags attribute */
+    const articleTags = article.getAttribute('data-tags');
+
+    /* split tags into array */
+    const articleTagsArray = articleTags.split(' ');
+
+    /* START LOOP: for each tag */
+    for(let tag of articleTagsArray){
+
+      /* generate HTML of the link */
+      const linkHTML = '<li><a href="#tag-' + tag + '"><span>' + tag + '</span></a></li>';
+      console.log(linkHTML);
+
+      /* add generated code to html variable */
+      html = html + linkHTML;
+
+      /* [NEW] check if this link is NOT already in allTags */
+      if(!allTags[tag]) {
+        /* [NEW] add generated code to allTags array */
+        allTags[tag] = 1;
+      }else{
+        allTags[tag]++;
+      }
+
+    /* END LOOP: for each tag */
+    }
+    /* insert HTML of all the links into the tags wrapper */
+
+  /* END LOOP: for every article: */
+  }
+ /* [NEW] create variable for all links HTML code */
+ const tagsParams = calculateTagsParams(allTags);
+console.log('tagsParams:', tagsParams)
+let allTagsHTML = '';
+
+/* [NEW] START LOOP: for each tag in allTags: */
+for(let tag in allTags){
+  /* [NEW] generate code of a link and add it to allTagsHTML */
+  const tagLinkHTML = '<li>' + calculateTagClass(allTags[tag], tagsParam) + '</li>';
+console.log('tagLinkHTML:', tagLinkHTML);
+  allTagsHTML += tagLinkHTML;
+/* [NEW] END LOOP: for each tag in allTags: */
+}
+/*[NEW] add HTML from allTagsHTML to tagList */
+tagList.innerHTML = allTagsHTML;
