@@ -126,8 +126,14 @@ body {
   }
 }
 
-.tag-size-x {
-  font-size: 22px;
-  color: $color-dark;
-  display: inline-block;
+.tag-size-small {
+  font-size: 12px;
+}
+
+.tag-size-medium {
+  font-size: 18px;
+}
+
+.tag-size-big {
+  font-size: 28px;
 }
