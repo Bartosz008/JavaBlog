@@ -1,5 +1,7 @@
 const templates = {
-  articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML)
+  articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML),
+  tagLink: Handlebars.compile(document.querySelector('#template-tag-link').innerHTML),
+  authorLink: Handlebars.compile(document.querySelector('#template-author-link').innerHTML)
 }
 const titleClickHandler = function(event){
   event.preventDefault();
@@ -75,7 +77,7 @@ function generateTags(){
     const tagsWrapperList = article.querySelector('.post-tags .list');
 
     /* make html variable with empty string */
-    let html = '';
+    const allTagsData = {tags: []};
 
     /* get tags from data-tags attribute */
     const articleTags = article.getAttribute('data-tags');
@@ -94,11 +96,11 @@ function generateTags(){
 
 
       /* generate HTML of the link */
-      const linkHTML = '<li><a href="#tag-' + tag + '"><span>' + tag + '</span></a></li>';
-      console.log(linkHTML);
+      const linkHTMLData = {id: tagleId, title: tagTitle};
+      const linkHTML = templates.tagLink(linkHTMLData);
 
       /*?? add generated code to html variable?? */
-      html = html + linkHTML;
+      tagList.innerHTML = templates.tagCloudLink(allTagsData);
 
 
     /* END LOOP: for each tag */
@@ -120,8 +122,13 @@ function generateTags(){
     else if(allTags[tag] < 4) className = 'tag-size-medium';
     else className = 'tag-size-big';
 
-    const tagLink = '<li><a class="' + className + '" href="#tag-' + tag + '">' + tag + '</a> <span>(' + allTags[tag] + ')</span></li>';
-    tagsCloundContainer.innerHTML += tagLink; 
+    const linkHTMLData = {id: tagId, title: tagTitle};
+    const linkHTML = templates.tagLink(linkHTMLData);
+    allTagsData.tags.push({
+      tag: tag,
+      count: allTags[tag],
+      className: calculateTagClass(allTags[tag], tagsParams)
+    });
   }
 
 }
@@ -188,7 +195,8 @@ function generateAuthors() {
 
     const authorWrapper = article.querySelector('.post-author');
     const author = article.getAttribute('data-author');
-    const linkHTML = '<a href="#author-' + author + '">by <span>' + author + '</span></a></li>';
+    const linkHTMLData = { author: author };
+    const linkHTML = templates.articleLink(linkHTMLData);
     
     if(!allAuthors.includes(author)) allAuthors.push(author)
 
@@ -199,7 +207,8 @@ function generateAuthors() {
   sidebarAuthors.innerHTML = '';
 
   for(const author of allAuthors) {
-    const authorLink = '<li><a href="#author-' + author + '"><span class="author-name">' + author + '</span></a></li>'
+    const linkHTMLData = { author: author };
+    const linkHTML = templates.articleLink(linkHTMLData);
     sidebarAuthors.innerHTML += authorLink;
   }
 
