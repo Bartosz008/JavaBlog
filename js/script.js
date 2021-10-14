@@ -1,8 +1,11 @@
 const templates = {
   articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML),
   tagLink: Handlebars.compile(document.querySelector('#template-tag-link').innerHTML),
-  authorLink: Handlebars.compile(document.querySelector('#template-author-link').innerHTML)
+  tagCloudLink: Handlebars.compile(document.querySelector('#template-cloud-tag-link').innerHTML),
+  authorLink: Handlebars.compile(document.querySelector('#template-author-link').innerHTML),
+  authorRightLink: Handlebars.compile(document.querySelector('#template-author-right-link').innerHTML),
 }
+
 const titleClickHandler = function(event){
   event.preventDefault();
   const clickedElement = this;
@@ -46,7 +49,7 @@ function generateTitleLinks(customSelector = ''){
     /* get the title from the title element */
 
     /* create HTML of the link */
-    const linkHTMLData = {id: articleId, title: articleTitle};
+    const linkHTMLData = { id: articleId, title: articleTitle };
     const linkHTML = templates.articleLink(linkHTMLData);
 
     html = html + linkHTML;
@@ -85,6 +88,8 @@ function generateTags(){
     /* split tags into array */
     const articleTagsArray = articleTags.split(' '); //['cat', 'cactus', 'test']
 
+    let html = '';
+
     /* START LOOP: for each tag */
     for(let tag of articleTagsArray){
 
@@ -96,11 +101,10 @@ function generateTags(){
 
 
       /* generate HTML of the link */
-      const linkHTMLData = {id: tagleId, title: tagTitle};
-      const linkHTML = templates.tagLink(linkHTMLData);
+      const linkHTML = templates.tagLink({ tagName: tag }); 
 
       /*?? add generated code to html variable?? */
-      tagList.innerHTML = templates.tagCloudLink(allTagsData);
+      html = html + linkHTML;
 
 
     /* END LOOP: for each tag */
@@ -115,6 +119,7 @@ function generateTags(){
   const tagsCloundContainer = document.querySelector('.sidebar .tags');
   tagsCloundContainer.innerHTML = '';
 
+  let html = '';
   for(const tag in allTags) {
 
     let className = '';
@@ -122,14 +127,11 @@ function generateTags(){
     else if(allTags[tag] < 4) className = 'tag-size-medium';
     else className = 'tag-size-big';
 
-    const linkHTMLData = {id: tagId, title: tagTitle};
-    const linkHTML = templates.tagLink(linkHTMLData);
-    allTagsData.tags.push({
-      tag: tag,
-      count: allTags[tag],
-      className: calculateTagClass(allTags[tag], tagsParams)
-    });
+    const linkHTML = templates.tagCloudLink({ tagName: tag, className: className });
+    html = html + linkHTML;
   }
+
+  tagsCloundContainer.innerHTML = html;
 
 }
 
@@ -195,8 +197,8 @@ function generateAuthors() {
 
     const authorWrapper = article.querySelector('.post-author');
     const author = article.getAttribute('data-author');
-    const linkHTMLData = { author: author };
-    const linkHTML = templates.articleLink(linkHTMLData);
+
+    const linkHTML = templates.authorLink({ authorName: author });
     
     if(!allAuthors.includes(author)) allAuthors.push(author)
 
@@ -205,12 +207,14 @@ function generateAuthors() {
 
   const sidebarAuthors = document.querySelector('.sidebar .authors');
   sidebarAuthors.innerHTML = '';
+  let html = '';
 
   for(const author of allAuthors) {
-    const linkHTMLData = { author: author };
-    const linkHTML = templates.articleLink(linkHTMLData);
-    sidebarAuthors.innerHTML += authorLink;
+    const linkHTML = templates.authorRightLink({ authorName: author });
+    html = html + linkHTML;
   }
+
+  sidebarAuthors.innerHTML = html;
 
 }
 
@@ -269,4 +273,3 @@ generateTags();
 addClickListenersToTags();
 generateAuthors();
 addClickListenersToAuthor();
-
